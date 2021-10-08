@@ -24,7 +24,7 @@ pygame.draw.rect(w,[255,255,255],mid)
 
 # Will randomly determine a direction for the ball to go in
 ballDirX = random.choice([30,-30])
-ballDirY = random.choice([10,-10])
+ballDirY = random.choice([5,-5])
 ogbx = 960
 ogby = 540
 bx = ogbx
@@ -45,9 +45,9 @@ point = False
 begin = True
 spawnpowerup = False # -- Also work in progress
 powerups = ["fBall","fPaddles","kFace"] # -- Additionally, this is a work in progress
-egg = pygame.mixer.Sound("acoustic_guitar_G.mp3") # -- Score Sound
+egg = pygame.mixer.Sound("sonar_ping.mp3") # -- Score Sound
 crackedEgg = pygame.mixer.Sound("electric_guitar_G.mp3") # -- Win sound
-bounce = pygame.mixer.Sound("chiptune_G.mp3") # -- Paddle Sound
+bounce = pygame.mixer.Sound("button_select.mp3") # -- Paddle Sound
 
 # Paddle Setup
 p1 = pygame.Rect(p1x,p1y,50,200)
@@ -109,12 +109,10 @@ while running:
     
     if ball.colliderect(p1):
         ballDirX = -ballDirX
-        bx += 10
         bounce.play()
         pygame.time.wait(10)
         bounce.stop()
     if ball.colliderect(p2):
-        bx -= 10
         ballDirX = -ballDirX
         bounce.play()
         pygame.time.wait(10)
@@ -138,11 +136,11 @@ while running:
     if ball.right >= 1920:
         
         # Erases old paddles
-        erase2 = pygame.Rect(p1x,p1y,50,200)
+        erase2 = pygame.Rect(p1x-10,p1y-10,100,310)
         pygame.draw.rect(w,[0,0,0],erase2)
-        erase3 = pygame.Rect(p2x,p2y,50,200)
+        erase3 = pygame.Rect(p2x-10,p2y-10,100,310)
         pygame.draw.rect(w,[0,0,0],erase3)
-        
+        pygame.display.flip()
         # Resets paddles to original position
         p1x = 25
         p1y = 440
@@ -191,7 +189,7 @@ while running:
         
         # Chooses new ball direction
         ballDirX = random.choice([30,-30])
-        ballDirY = random.choice([10,-10])
+        ballDirY = random.choice([5,-5])
         
         # Resets ball position
         bx = ogbx
@@ -256,7 +254,7 @@ while running:
         
         # Chooses new ball direction
         ballDirX = random.choice([30,-30])
-        ballDirY = random.choice([10,-10])
+        ballDirY = random.choice([5,-5])
         
         # Resets ball position
         bx = ogbx
